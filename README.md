@@ -36,19 +36,26 @@ Install Miniconda for your OS (Windows/macOS/Linux): https://docs.conda.io/en/la
 
 Follow these [Python SDK steps](https://docs.microsoft.com/en-us/azure/machine-learning/service/setup-create-workspace#sdk) to create an isolated Python environment with the azureml-sdk, jupyter notebook and other required dependencies.
 
-### Launch Jupyter Notebook
+## Part 1 - Jupyter Notebook Guide
+
+For the first part of the workshop, you'll use a typical Data Science workflow based around using interactive Jupyter Notebooks.
 
 Open a terminal and change to the root directory where you cloned this git repository.
 
 Launch Jupyter Notebook:
 
 ```sh
+cd <git-repo-dir>
 jupyter notebook
 ```
 
-## Workshop Guide
+From the Jupyter notebooks web interface, open the [dog-breed-classifier.ipynb](./dog-breed-classifier.ipynb) notebook and follow the instructions.
 
-From the Jupyter notebooks interface, open the [dog-breed-classifier.ipynb](./dog-breed-classifier.ipynb) notebook and follow the instructions.
+## Part 2 - MLOps Guide
+
+Now it's time to operationalise the machine learning process so that changes to the model code or training data can be automated using DevOps pipelines.
+
+For the second part of the workshop, refer to the [MLOps guide](mlops.md).
 
 ## Credits
 
