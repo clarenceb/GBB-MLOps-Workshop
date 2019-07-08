@@ -1,6 +1,8 @@
 # GBB MLOps Workshop
 
-In this tutorial, you will learn how to train your own image classification model using transfer learning. The Azure Machine Learning python SDK's [PyTorch estimator](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-train-pytorch) enables you to easily submit PyTorch training jobs for both single-node and distributed runs on Azure compute. The model is trained to classify dog breeds using a pretrained ResNet18 model that has been trained on the [Stanford Dog dataset](http://vision.stanford.edu/aditya86/ImageNetDogs/). This dataset has been built using images and annotation from ImageNet for the task of fine-grained image categorization. For time, we will use a subset of this dataset which includes 10 dog breeds.
+In this tutorial, you will learn how to train your own image classification model using [transfer learning](https://cs231n.github.io/transfer-learning/).
+
+The Azure Machine Learning python SDK's [PyTorch estimator](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-train-pytorch) enables you to easily submit PyTorch training jobs for both single-node and distributed runs on Azure compute. The model is trained to classify dog breeds using a pretrained ResNet18 model that has been trained on the [Stanford Dog dataset](http://vision.stanford.edu/aditya86/ImageNetDogs/). This dataset has been built using images and annotation from ImageNet for the task of fine-grained image categorization. To reduce workshop time, we will use a subset of this dataset which includes 10 dog breeds.
 
 ## Prerequisities
 
@@ -29,7 +31,9 @@ If you plan to use a local development environment, follow these steps.
 
 Install Miniconda for your OS (Windows/macOS/Linux): https://docs.conda.io/en/latest/miniconda.html
 
-Follow these [Python SDK steps](https://docs.microsoft.com/en-us/azure/machine-learning/service/setup-create-workspace#sdk) to create an isolated Python environment with the azureml-sdk, jupyter notebooks and other required dependencies.
+### Install Python dependencies
+
+Follow these [Python SDK steps](https://docs.microsoft.com/en-us/azure/machine-learning/service/setup-create-workspace#sdk) to create an isolated Python environment with the azureml-sdk, jupyter notebook and other required dependencies.
 
 ### Launch Jupyter Notebook
 
