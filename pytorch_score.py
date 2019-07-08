@@ -33,7 +33,7 @@ def base64ToImg(base64ImgString):
 
 def init():
     global model
-    model_path = Model.get_model_path('myspecialmodel')
+    model_path = Model.get_model_path('dogbreedmodel')
     model = torch.load(model_path, map_location=lambda storage, loc: storage)
     model.eval()
 
