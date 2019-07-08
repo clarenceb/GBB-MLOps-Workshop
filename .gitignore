@@ -1,0 +1,4 @@
+.azureml
+.ipynb_checkpoints
+.vscode
+pytorch-dog-breeds-10
