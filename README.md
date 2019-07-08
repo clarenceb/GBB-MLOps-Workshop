@@ -4,8 +4,9 @@ In this tutorial, you will learn how to train your own image classification mode
 
 The Azure Machine Learning python SDK's [PyTorch estimator](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-train-pytorch) enables you to easily submit PyTorch training jobs for both single-node and distributed runs on Azure compute. The model is trained to classify dog breeds using a pretrained ResNet18 model that has been trained on the [Stanford Dog dataset](http://vision.stanford.edu/aditya86/ImageNetDogs/). This dataset has been built using images and annotation from ImageNet for the task of fine-grained image categorization. To reduce workshop time, we will use a subset of this dataset which includes 10 dog breeds.
 
-## Prerequisities
+## Prerequisites
 
+* A laptop where you can install and run local applications
 * [Azure Subscription](https://azure.microsoft.com/en-us/free/) with [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) role or a pre-created [Resource Group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview) where you have [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) role assigned to your Azure AD user.
 * Access to the Following Azure resources:
     - Azure Machine Learning Service
