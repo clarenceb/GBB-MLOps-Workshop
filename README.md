@@ -14,14 +14,14 @@ The workshop consists of two parts:
 * A laptop where you have admin rights to install and run local applications
 * An [Azure Subscription](https://azure.microsoft.com/en-us/free/) with [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) role or a pre-created [Resource Group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview) where you have [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor) role assigned to your Azure AD user.
 * Access to the Following Azure resources:
-    - Azure Machine Learning Service
-    - Azure Container Registry
-    - Azure Storage Account
-    - Azure Key Vault
-    - Azure Application Insights
-    - Azure Container Instances
-    - Azure Kubernetes Service
-    - Azure Virtual Machines
+  * Azure Machine Learning Service
+  * Azure Container Registry
+  * Azure Storage Account
+  * Azure Key Vault
+  * Azure Application Insights
+  * Azure Container Instances
+  * Azure Kubernetes Service
+  * Azure Virtual Machines
 * (Optional) Access to GPU VM SKUs (e.g. `Standard_NC6` or `Standard_NC6s_v2`) -- otherwise substitute for a CPU SKU; training may take longer.
 
 Check that the Azure resources and [VM series](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=virtual-machines) you will use are [available in your region](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=); otehrwise choose a different region for these services.
@@ -38,7 +38,7 @@ If you plan to use a local development environment, follow these steps to config
 
 ### Install Miniconda
 
-Install Miniconda for your OS (Windows/macOS/Linux): https://docs.conda.io/en/latest/miniconda.html
+Install Miniconda for your OS (Windows/macOS/Linux): [https://docs.conda.io/en/latest/miniconda.html](https://docs.conda.io/en/latest/miniconda.html)
 
 ### Install Python dependencies
 
@@ -65,9 +65,16 @@ Now it's time to operationalise the machine learning process so that changes to 
 
 For the second part of the workshop, refer to the [MLOps guide](mlops.md).
 
+## Contributing
+
+Do not commit changes to notebook files where you have run through the workshop yourself and filled in placeholders or have output(s) shown after executing cells.
+
+* Revert placeholders back to their original states
+* Clear cell outputs: from the Jupyter notbook interface select: Cell > All Output > Clear
+
 ## Credits
 
-* This workshop was forked from here: https://github.com/ronglums/PyCon-2019
+* This workshop was forked from here: [https://github.com/ronglums/PyCon-2019](https://github.com/ronglums/PyCon-2019)
 
 ## References
 
