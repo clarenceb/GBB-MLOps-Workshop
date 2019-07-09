@@ -32,6 +32,8 @@ Verify the container image repository name and version from the **Services** / *
 
 ![ImageRepo](screenshots/part2-image-repo.PNG)
 
+**Note**: The Azure ML service created the Container Registry for you when you created your first Docker image (`WebService.deploy_from_model`).
+
 Pull the model image from the container registry:
 
 ```sh
@@ -91,9 +93,68 @@ docker rm -f dogbreedsvc
 
 ## Creating our AKS cluster
 
+Azure ML service supports [creation of an AKS cluster](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where#create-a-new-aks-cluster) via the [Azure Machine Learning SDK for Python](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/intro).
+
+However, in a typical production environment, the cluster would already exist and would have been provisioned and security hardened by an infrastructure or ops team.
+
+Creation of a AKS cluster can therefore be achieved through ARM Templates, Terraform, PowerShell scripts, Azure CLI or even the Azure Portal.
+
+For the purposes of this workshop, we'll create an AKS cluster using the Azure CLI and then [attach to the cluster](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where#attach-an-existing-aks-cluster) in our Python code.
+
+### Azure CLI local setup
+
+Complete these steps:
+
+* [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+* [Sign in interactively](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli?view=azure-cli-latest#sign-in-interactively)
+
+### Azure Cloud Shell
+
+You can use the [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) from the Azure Portal if you do not wish to install the Azure CLI locally.  The Azure CouldShell has the Azure CLI and other tools already pre-installed.
+
+### Choose your Azure subscriptions:
+
+List your Azure subscriptions:
+
+```sh
+az account list
+```
+
+Select the subscription you want to use:
+
+```sh
+az account set --subscription <id>
+```
+
+### Create the AKS cluster (basic networking)
+
+Follow the steps outlined in [Tutorial: Deploy an Azure Kubernetes Service (AKS) cluster](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster) to create a cluster with basic networking and 3 nodes.
+
+Use this command to create the cluster instead of the one shown in the linked tutorial above.
+
+```sh
+az aks create \
+    --resource-group DogBreeds \
+    --name DogBreeds \
+    --node-count 3 \
+    --kubernetes-version 1.13.5 \
+    --service-principal <appId> \
+    --client-secret <password> \
+    --generate-ssh-keys \
+    --enable-addons monitoring
+```
+
+**Note**: Unless you specify a Log Analytics workspace, one will be created for you in a default resource group which may violate your corporate Azure Policy.  In this case, either create or specify an existing workspace with the parameter `--workspace-resource-id` or remove the parameter `--enable-addons monitoring` all together.
+
+### Create the AKS cluster (advanced networking)
+
 ## Deploying to AKS
 
-## Create Azure DevOps orgnization and project
+### Using the Azure Machine Learning SDK for Python
+
+### Using a Helm and Ingress Controller
+
+## Create Azure DevOps organization and project
 
 ## Setup Azure Repos
 
