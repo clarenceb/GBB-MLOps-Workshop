@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Part 2 of this workshop will focus on operationalising our ML model via CI/CD pipelines so that we have an end-to-end, automated, repeatable process.  Much of this process is described in the [MLOps with Azure ML](https://github.com/microsoft/MLOpsPython) GitHub repository.  We'll use this approach as a basis for our workshop.
+Part 2 of this workshop will focus on operationalising our ML model via CI/CD pipelines so that we have an end-to-end, automated, repeatable process.  Much of this process is described in the [MLOps with Azure ML](https://github.com/microsoft/MLOpsPython) GitHub repository.  We'll use this approach as a basis for our workshop and you can refer to the source code in thast repo for hints.
 
 ## (Optional) Test our Docker Image ML model locally
 
@@ -95,6 +95,8 @@ docker rm -f dogbreedsvc
 
 Azure ML service supports [creation of an AKS cluster](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where#create-a-new-aks-cluster) via the [Azure Machine Learning SDK for Python](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/intro).
 
+For Dev-Test clusters, you can create the cluster using the Azure ML SDK for Python (see: [example code](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/deployment/production-deploy-to-aks/production-deploy-to-aks.ipynb)).
+
 However, in a typical production environment, the cluster would already exist and would have been provisioned and security hardened by an infrastructure or ops team.
 
 Creation of a AKS cluster can therefore be achieved through ARM Templates, Terraform, PowerShell scripts, Azure CLI or even the Azure Portal.
@@ -112,7 +114,7 @@ Complete these steps:
 
 You can use the [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) from the Azure Portal if you do not wish to install the Azure CLI locally.  The Azure CouldShell has the Azure CLI and other tools already pre-installed.
 
-### Choose your Azure subscriptions:
+### Choose your Azure subscriptions
 
 List your Azure subscriptions:
 
@@ -152,16 +154,100 @@ az aks create \
 
 ### Using the Azure Machine Learning SDK for Python
 
-### Using a Helm and Ingress Controller
+You'll need to import existing the AKS cluster definition into your AML workspace so you can deploy models to it.  Hint: see [Attach an existing AKS cluster](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where#attach-an-existing-aks-cluster).
+
+**Note**: attaching the cluster will install some components needed by AML service like a HTTP reverse proxy for TLS termination and API key authentication.
+
+Create a Python script to deploy our model to the AKS cluster.
+
+*Hint*: see [Configure your Azure ML workspace](https://github.com/Azure/MachineLearningNotebooks/blob/master/setup-environment/configuration.ipynb) and [Deploy web service to AKS](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/deployment/production-deploy-to-aks/production-deploy-to-aks.ipynb#Deploy-web-service-to-AKS)
+
+**Later, we'll use a code repository (git) to version control our scripts and run from our DevOps pipeline.**
+
+Test the deployed web service works using `curl` or a python script ([hint](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/deployment/production-deploy-to-aks/production-deploy-to-aks.ipynb#Test-the-web-service-using-run-method)).
+
+### Using Helm and Ingress Controller
+
+TODO:
+
+* Create Helm chart for model
+* Setup Ingress controller for HTTP endpoint
+* (Optional) Use an internal LB
+
+### Use `kubectl` to inspect kubernetes objects in AKS
+
+If you followed the [cluster setup](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster) steps, you should have `kubectl` configured for your cluster.
+
+Check the deployed `services`, `deployments`, `pods` in the cluster (learn more about [Kubernetes concepts](https://www.youtube.com/watch?v=3I9PkvZ80BQ)).
+
+**Note**: When using the Azure ML to deploy your models, they will be placed in a `namespace` of the format `azureml-<workspace>`, e.g. `azureml-dogbreeds`.
+
+```sh
+# hint:
+kubectl get svc,deploy, pod -n <namespace>
+```
 
 ## Create Azure DevOps organization and project
 
+TODO:
+
+* Sign-up for or login to Azure DevOps
+* Create your organisation
+* Create a project for your DogBreeds code
+
 ## Setup Azure Repos
+
+TODO:
+
+* Create a new git repo in Azure Repos for your project
+* Extract your Python code into scripts
+* Commit and push your files to the git remote
 
 ## Setup Azure Pipelines
 
-TODO
+Use the [MLOps with Azure ML](https://github.com/microsoft/MLOpsPython) code repository as a basis for your solution.  Look at the Python scripts used, build, retraining, and release pipelines.
+
+TODO:
+
+* Setup CI pipeline to create your AML workspace, training cluster and AML pipeline (is using a ML pipeline)
+* Setup retraining pipeline (trigger AML pipeline or run local scripts to train on remote AML compute)
+
+### Deploying services using the Azure Machine Learning SDK for Python
+
+TODO:
+
+* Set deployment pipeline with Python scripts to deploy to AKS
+* Customise the service deployment parameters (liek CPU, memory, autoscaling, etc.)
+
+### Deploying using Helm
+
+TODO:
+
+* Set deployment pipeline with Helm (deploy to a namespace)
+
+## Scaling our deployed models
+
+TODO:
+
+* Autoscaling via WebService object in Python SDK or HPA with Helm
+* Node Autoscaler (requires VMSS in cluster)
+
+## Instrumenting our deployed models
+
+TODO:
+
+* If deploying via Azure ML SDK for Python, turn on Application Insights option for service
+* (Optional) Add additional instrumentation to scoring script with Application Insights SDK code
+
+## Extensions
+
+Possible extensions to investigate further:
+
+* Use [Automated ML](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/automated-machine-learning) to find best model by automatically adjusting hyperparameters, feature selection, and choice of algorithm.
+* Use [HyperDrive](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-tune-hyperparameters) tune hyperparameters within a parameter search space
+* Use [ML pipelines](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/machine-learning-pipelines) to create a training pipeline in Azure ML service
 
 ## References
 
 * [MLOps using Azure ML Services and Azure DevOps](https://github.com/microsoft/MLOpsPython)
+* [Production Deploy to AKS - Jupyter Notebook](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/deployment/production-deploy-to-aks/production-deploy-to-aks.ipynb)
