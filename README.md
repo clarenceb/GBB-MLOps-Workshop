@@ -80,5 +80,6 @@ Do not commit changes to notebook files where you have run through the workshop 
 
 * [Azure Machine Learning Service docs](https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml)
 * [MLOps using Azure ML Services and Azure DevOps](https://github.com/microsoft/MLOpsPython)
+* [Azure ML SDK for Python reference](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/intro)
 * [Transfer Learning](https://cs231n.github.io/transfer-learning/)
 * [The Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html)
